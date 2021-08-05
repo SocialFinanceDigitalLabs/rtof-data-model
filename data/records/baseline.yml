@@ -8,7 +8,7 @@ fields:
     name: Unique person identifier
     type: string
     description: Person identifier provided in the person form. This can be a NINO or a unique provider ID. This must be unique for each individual supported on RTOF.
-    comments: Minimum data collection required to understand enrolment
+    comments: 
     primary_key: true
     foreign_keys:
     - record: person
@@ -22,7 +22,7 @@ fields:
     description: Nationality of participant. A list of nationalities are provided.
       Must select one of the given categories, please see nationality descriptions
       to link with the relevant code. To be collected once and submitted within 3 months of enrolment.
-    comments: Using the same categories as the HO. 
+    comments: To ensure we use the same categories HO use for data collection
     validation:
       required: true
       dimension: nationality
@@ -42,8 +42,7 @@ fields:
     type: Categorical
     description: Selection of either single or couple. Couple includes living with
       more than one individual. To be collected once and submitted within 3 months of enrolment.
-    comments: Selection of either single or couple - do we need provision for alternative
-      couples (+2 living together)
+    comments: 
     validation:
       required: true
       dimension: living_status
@@ -61,7 +60,7 @@ fields:
   current_dependents_uk:
     name: Current dependents in UK
     type: List
-    description: Selection of each option that applies to the participant. To be collected once and submitted within 3 months of enrolment.
+    description: Selection of each option that describes someone (1 or more) currently dependant on the participant. To be collected once and submitted within 3 months of enrolment.
     validation:
       required: true
 
@@ -70,8 +69,7 @@ fields:
     type: Date
     description: Date participant entered the UK, relating to their latest and current
       arrival. To be collected once and submitted within 3 months of enrolment.
-    comments: To confirm alternative collection route if an integration plan is not
-      submitted [eg. Provider caseload review]
+    comments:
     validation:
       required: true
       date_after: date_of_birth
@@ -100,7 +98,7 @@ fields:
     name: Language level on entry
     type: Categorical
     description: The language level of participant when entering RTOF. Selection of
-      one of the specified category, further information on these levels can be found
+      one of the specified categories, further information on these levels can be found
       here [https://esol.britishcouncil.org/sites/default/files/attachments/informational-page/ESOL%20level%20descriptors.pdf].
       To be collected once and submitted within 3 months of enrolment.
     comments: https://esol.britishcouncil.org/sites/default/files/attachments/informational-page/ESOL%20level%20descriptors.pdf
@@ -112,13 +110,22 @@ fields:
     name: Highest qualification  level achieved
     type: Categorical
     description: The highest level of qualification of participant when entering RTOF.
-      Selection of one of the specified category, these refer to [https://www.gov.uk/what-different-qualification-levels-mean/list-of-qualification-levels#:~:text=Level%205%20qualifications%20are%3A,higher%20national%20diploma%20(%20HND%20)]. 
+      Selection of one of the specified categories, these refer to [https://www.gov.uk/what-different-qualification-levels-mean/list-of-qualification-levels#:~:text=Level%205%20qualifications%20are%3A,higher%20national%20diploma%20(%20HND%20)]. 
       To be collected once and submitted within 3 months of enrolment.
-    comments: To provide a relevant link to equivalent qualification  levels around
+    comments: To provide a relevant link to equivalent qualification levels around
       the world (https://www.gov.uk/what-different-qualification-levels-mean/list-of-qualification-levels)
     validation:
       required: true
       dimension: highest_qualification_achieved
+
+  age_finished_study:
+    name: Age when finished study
+    type: integer
+    description: This should only be submitted if the response to the field "highest qualification level achieved" 
+      was "unknown"
+    comments: 
+    validation:
+      dimension: age_finished_study
 
   employed_in_home_country:
     name: Employed in home country
@@ -126,8 +133,7 @@ fields:
     description: When participant left home country were they in any form of employment - yes / no response. 
       To be collected once and submitted within 3 months of enrolment.
     comments: Simple yes / no selection. To confirm whether this refers to 'ever employed
-      in home country' or 'within a given time period before arriving in the UK' [explain
-      use case of question - understanding if work in UK is comparable to prior experience]
+      in home country' or 'within a given time period before arriving in the UK'. [Use case of question - understanding if work in UK is comparable to prior experience]
     validation:
       required: true
       dimension: employed_in_home_country
@@ -136,8 +142,8 @@ fields:
     name: Occupation type
     type: Free Text (short)
     description: If answered 'Yes' to employed in home country field, state job role
-      [e.g. teacher] of their last employment. Max word count 10 words. To be collected once and submitted within 3 months of enrolment.
-    comments: To confirm word limit (and possibly add a suggestion ie. Teacher)
+      [e.g. teacher] of their last employment. To be collected once and submitted within 3 months of enrolment.
+    comments: 
     validation:
       character_limit: 255
 
@@ -145,8 +151,8 @@ fields:
     name: Sector
     type: Free Text (short)
     description: If answered 'Yes' to employed in home country field, state the sector
-      [eg. education] of their last employment. Max word count 10 words. To be collected once and submitted within 3 months of enrolment.
-    comments: To confirm word limit (and possibly add a suggestion ie. Education)
+      [eg. education] of their last employment. To be collected once and submitted within 3 months of enrolment.
+    comments: 
     validation:
       character_limit: 255
 
@@ -172,7 +178,7 @@ fields:
     name: Accommodation type
     type: Categorical
     description: tbc
-    comments: Ecorys to provide details. To be collected once and submitted within 3 months of enrolment.
+    comments: tbc - once selected, the categories will align with the housing entry collection. 
     validation:
       required: true
       dimension: housing_baseline_accommodation
